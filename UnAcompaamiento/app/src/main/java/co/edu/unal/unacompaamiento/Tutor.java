@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,51 +15,44 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import co.edu.unal.unacompaamiento.Services.EstudianteService;
+import co.edu.unal.unacompaamiento.model.Estudiante;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Tutor extends AppCompatActivity {
-
-    Button inboxt;
-    ListView infostd;
-
+/*
+    EstudianteService estudianteService;
+    List<Estudiante> listaEstudiantes = new ArrayList<>();
+    ListView listView;
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor);
-        inboxt=findViewById(R.id.inboxt);
-        inboxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Tutor.this,Bandeja1.class));
-                finish();
 
-            }
-        });
-
-        infostd=(ListView) findViewById(R.id.list_std);
-
-        ArrayList<String> listaEstudiantes=new ArrayList<>();
-        listaEstudiantes.add("juan Jose 1");
-        listaEstudiantes.add("juan Alberto 2");
-        listaEstudiantes.add("juan Benito 3");
-        listaEstudiantes.add("juan Carlos 4");
-        listaEstudiantes.add("juan Esteban 5");
-        ArrayAdapter adaptador=new ArrayAdapter(this,android.R.layout.simple_list_item_1,listaEstudiantes);
-
-        infostd.setAdapter(adaptador);
-        infostd.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(Tutor.this,Student_info.class));
-                finish();
-                /////
-
-                //metodo para mostrar la info de los estudiantes
-                Toast.makeText(parent.getContext(),"Estudiante: "+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
+        //listView = (ListView) findViewById(R.id.listaTutor);
+        //listarEstudiantes();
     }
+    /*
+    public void listarEstudiantes(){
+        Call<List<Estudiante>> call = estudianteService.getEstudiantes();
+
+        call.enqueue(new Callback<List<Estudiante>>() {
+            @Override
+            public void onResponse(Call<List<Estudiante>> call, Response<List<Estudiante>> response) {
+                listaEstudiantes = response.body();
+                listView.setAdapter(new EstudianteAdapter(Tutor.this, R.layout.activity_tutor, listaEstudiantes));
+            }
+
+            @Override
+            public void onFailure(Call<List<Estudiante>> call, Throwable t) {
+                Log.e("Error", t.getMessage());
+            }
+        });
+    }
+    */
 }
